@@ -32,8 +32,6 @@ require('lazy').setup({
 
   'numToStr/Comment.nvim',
 
-  -- 'mg979/vim-visual-multi',
-
   -- 'nvim-treesitter/nvim-treesitter-context',
   'tikhomirov/vim-glsl',
 
@@ -62,22 +60,18 @@ require('lazy').setup({
 
   {
     'mrcjkb/haskell-tools.nvim',
-    version = '^3', -- Recommended
+    version = '^3',
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
   },
 
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
 
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
-      -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
   },
@@ -95,13 +89,10 @@ require('lazy').setup({
     },
   },
 
-  -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
   {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
-      -- See `:help gitsigns.txt`
       signs = {
         add = { text = '+' },
         change = { text = '~' },
@@ -127,9 +118,7 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = true,
@@ -142,15 +131,11 @@ require('lazy').setup({
 
   {
     'lukas-reineke/indent-blankline.nvim',
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+    main = "ibl",
+    opts = {},
   },
 
   { 'numToStr/Comment.nvim', opts = {} },
-
-  -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -199,7 +184,6 @@ vim.o.smartcase = true
 
 vim.wo.signcolumn = 'yes'
 
-
 vim.o.completeopt = 'menuone,noselect'
 
 vim.o.termguicolors = true
@@ -207,7 +191,6 @@ vim.o.termguicolors = true
 vim.wo.relativenumber = true
 
 vim.cmd('source ~/.config/nvim/mascara.vim')
-vim.cmd('source ~/.config/nvim/copydiag.vim')
 
 vim.opt.shiftwidth = 4
 vim.opt.swapfile = false
@@ -216,15 +199,11 @@ vim.opt.backup = false
 vim.opt.spelllang = 'en_au'
 vim.opt.spell = true
 
--- [[ Basic Keymaps ]]
-
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
@@ -253,7 +232,6 @@ pcall(require('telescope').load_extension, 'fzf')
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
@@ -267,8 +245,6 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
--- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'svelte', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
@@ -332,6 +308,9 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+require("ibl").setup {
+  indent = { char = "┊" },
+}
 
 require("nvim-tree").setup({
   on_attach = function(bufnr)
@@ -346,21 +325,16 @@ local function tree_opts(desc)
 end
 
 vim.keymap.set('n', '<C-b>', require("nvim-tree.api").tree.toggle, tree_opts('Toggle'))
-
-
 vim.keymap.set('n', '<leader>b', '"_');
-
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-.>', vim.lsp.buf.code_action, { desc = 'Quick fix options' })
 
 
--- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 
--- [[ Configure LSP ]]
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
@@ -380,11 +354,9 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-  -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
@@ -392,7 +364,6 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-  -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
@@ -436,7 +407,6 @@ mason_lspconfig.setup_handlers {
   end
 }
 
--- [[ Configure nvim-cmp ]]
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -511,6 +481,7 @@ require('Comment').setup()
 --   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 -- }
 --
+
 require('diagflow').setup()
 
 local ccc = require("ccc")
@@ -523,5 +494,3 @@ ccc.setup({
     })
   },
 })
-
-
