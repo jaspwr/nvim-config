@@ -17,23 +17,15 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
-
   'github/copilot.vim',
-
   'ryanoasis/vim-devicons',
-
   'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
-
   'mhartington/formatter.nvim',
-
   'numToStr/Comment.nvim',
-
   -- 'nvim-treesitter/nvim-treesitter-context',
   'tikhomirov/vim-glsl',
-
   'dgagn/diagflow.nvim',
-
   'uga-rosa/ccc.nvim',
   {
     'goolord/alpha-nvim',
@@ -86,6 +78,7 @@ require('lazy').setup({
   },
 
   { 'folke/which-key.nvim',  opts = {} },
+
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -132,6 +125,7 @@ require('lazy').setup({
   },
 
   { 'numToStr/Comment.nvim', opts = {} },
+
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',

@@ -14,7 +14,6 @@ require("formatter").setup {
   }
 }
 
-
 require('Comment').setup()
 
 require('diagflow').setup()
