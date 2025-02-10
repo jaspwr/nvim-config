@@ -7,7 +7,6 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
@@ -28,7 +27,7 @@ end
 
 vim.keymap.set('n', '<C-b>', require("nvim-tree.api").tree.toggle, tree_opts('Toggle'))
 vim.keymap.set('n', '<leader>b', '"_');
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-.>', vim.lsp.buf.code_action, { desc = 'Quick fix options' })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-f>', vim.lsp.buf.code_action, { desc = 'Quick fix options' })
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
@@ -39,6 +38,12 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-S-i>', function()
   vim.cmd('Format')
 end, { desc = 'Format current buffer' })
 
-
-
-
+vim.keymap.set('n', '<leader>m', function()
+  require("harpoon.ui").toggle_quick_menu()
+end, { desc = 'Harpoon menu' })
+vim.keymap.set('n', '<leader>M', function()
+  require("harpoon.mark").add_file()
+end, { desc = 'Harpoon mark' })
+vim.keymap.set('n', '<leader><space>', function()
+  require("harpoon.ui").nav_next()
+end, { desc = 'Harpoon cycle' })

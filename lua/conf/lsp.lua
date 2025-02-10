@@ -46,6 +46,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  tailwindcss = {},
 }
 
 require('neodev').setup()

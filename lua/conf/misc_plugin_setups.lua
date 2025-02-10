@@ -77,3 +77,7 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+require("tailwind-tools").setup({
+  -- your configuration
+})

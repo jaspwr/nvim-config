@@ -1,4 +1,4 @@
-vim.cmd('source ~/.config/nvim/vimscript/mascara.vim')
+vim.cmd('source ~/Appdata/local/nvim/vimscript/mascara.vim')
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -34,7 +34,8 @@ require('lazy').setup({
       require 'alpha'.setup(require 'alpha.themes.startify'.config)
     end
   },
-
+  'nvim-lua/plenary.nvim',
+  'ThePrimeagen/harpoon',
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
@@ -139,6 +140,18 @@ require('lazy').setup({
         end,
       },
     },
+  },
+
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig", -- optional
+    },
+    opts = {} -- your configuration
   },
 
   {
