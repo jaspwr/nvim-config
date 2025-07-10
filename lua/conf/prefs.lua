@@ -18,6 +18,7 @@ vim.opt.shiftwidth = 4
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.spell = true
+vim.opt.tabstop = 4
 
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {

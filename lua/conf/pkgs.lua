@@ -149,9 +149,9 @@ require('lazy').setup({
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig", -- optional
+      "neovim/nvim-lspconfig",         -- optional
     },
-    opts = {} -- your configuration
+    opts = {}                          -- your configuration
   },
 
   {
@@ -162,4 +162,16 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    'tpope/vim-fugitive'
+  },
+
+  {
+    'mfussenegger/nvim-dap'
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+  }
 }, {})

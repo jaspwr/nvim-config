@@ -38,12 +38,36 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<C-S-i>', function()
   vim.cmd('Format')
 end, { desc = 'Format current buffer' })
 
-vim.keymap.set('n', '<leader>m', function()
+vim.keymap.set('n', '<leader>M', function()
   require("harpoon.ui").toggle_quick_menu()
 end, { desc = 'Harpoon menu' })
-vim.keymap.set('n', '<leader>M', function()
+vim.keymap.set('n', '<leader>m', function()
   require("harpoon.mark").add_file()
 end, { desc = 'Harpoon mark' })
 vim.keymap.set('n', '<leader><space>', function()
   require("harpoon.ui").nav_next()
 end, { desc = 'Harpoon cycle' })
+
+vim.keymap.set('n', '<leader>T', function()
+  require("tailwind-tools").conceal_toggle()
+end, { desc = 'Toggle tailwind classes' })
+
+vim.keymap.set('n', '<leader>db', function()
+  require("dap").toggle_breakpoint()
+end, { desc = 'Toggle breakpoint' })
+
+vim.keymap.set('n', '<leader>dc', function()
+  require("dap").continue()
+end, { desc = 'Debugger continue' })
+
+vim.keymap.set('n', '<leader>dd', function()
+  require("dap").step_over()
+end, { desc = 'Debugger step' })
+
+vim.keymap.set('n', '<leader>dt', function()
+  require("dap").terminate()
+end, { desc = 'Debugger terminate' })
+
+vim.keymap.set('n', '<leader>dr', function()
+  require("dap").run_last()
+end, { desc = 'Debugger run last' })
