@@ -17,7 +17,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   'tpope/vim-sleuth',
-  'github/copilot.vim',
+  -- 'github/copilot.vim',
   'ryanoasis/vim-devicons',
   'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
