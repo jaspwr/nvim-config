@@ -23,7 +23,6 @@ require('lazy').setup({
   'nvim-tree/nvim-web-devicons',
   'mhartington/formatter.nvim',
   'numToStr/Comment.nvim',
-  -- 'nvim-treesitter/nvim-treesitter-context',
   'tikhomirov/vim-glsl',
   'dgagn/diagflow.nvim',
   'uga-rosa/ccc.nvim',

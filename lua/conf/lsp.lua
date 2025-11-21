@@ -30,6 +30,7 @@ nmap('<leader>F', vim.lsp.buf.format, 'Format document')
 local servers = {
   clangd = {},
   rust_analyzer = {},
+  ols = {},
   svelte = {},
   -- hls = {},
   pyright = {},
